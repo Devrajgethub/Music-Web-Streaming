@@ -1,0 +1,23 @@
+<!-- templates/music/play_song.html -->
+{% extends "music/base.html" %} <!-- अगर आपके पास base template है -->
+
+{% block content %}
+    <div class="song-player-container">
+        <h1>Now Playing</h1>
+        <h2>{{ song.title }}</h2>
+        <p><strong>Artist:</strong> {{ song.artist }}</p>
+        <p><strong>Album:</strong> {{ song.album }}</p>
+        <p><strong>Play Count:</strong> {{ song.play_count }}</p>
+
+        <!-- यहाँ पर आप audio player का HTML tag लगा सकते हैं -->
+        {% if song.audio_file %}
+            <audio controls autoplay>
+                <source src="{{ song.audio_file.url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        {% endif %}
+
+        <br><br>
+        <a href="{% url 'home' %}">← Back to Home</a>
+    </div>
+{% endblock %}

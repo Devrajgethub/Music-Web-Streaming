@@ -1,0 +1,123 @@
+.podcast-card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.podcast-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.podcast-info {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.podcast-cover {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.podcast-details {
+    flex: 1;
+}
+
+.podcast-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.podcast-author {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+}
+
+.podcast-description {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.podcast-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.episode-count i, .episode-date i {
+    margin-right: 5px;
+}
+
+.podcast-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.latest-episodes {
+    margin-top: 3rem;
+}
+
+.section-title {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.episodes-list {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.podcast-episode-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.podcast-episode-item:last-child {
+    margin-bottom: 0;
+}
+
+.track-meta {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .podcast-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .podcast-cover {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 15px auto;
+    }
+    
+    .podcast-actions {
+        justify-content: center;
+    }
+    
+    .track-meta {
+        justify-content: center;
+        gap: 10px;
+    }
+}

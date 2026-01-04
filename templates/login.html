@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Discover Music - MusicStream{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section with Search -->
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Discover Amazing Music</h1>
+        <p class="lead">Find the perfect track for your project. All music is free to use.</p>
+        <form class="d-flex justify-content-center mt-4" method="GET" action="{% url 'music:search' %}">
+            <input class="form-control me-2" type="search" name="q" placeholder="Search for music, artists, or genres..." style="max-width: 500px;">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+<!-- Filter and Sort Bar -->
+<div class="container mt-4">
+    <div class="filter-bar d-flex justify-content-between align-items-center flex-wrap">
+        <div class="d-flex gap-3">
+            <select class="form-select form-select-sm" style="width: auto;">
+                <option selected>All Genres</option>
+                <option value="1">Cinematic</option>
+                <option value="2">Pop</option>
+                <option value="3">Rock</option>
+                <option value="4">Electronic</option>
+            </select>
+            <select class="form-select form-select-sm" style="width: auto;">
+                <option selected>All Moods</option>
+                <option value="1">Happy</option>
+                <option value="2">Sad</option>
+                <option value="3">Energetic</option>
+            </select>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <span class="text-light">{{ songs.count }} songs</span>
+            <select class="form-select form-select-sm" style="width: auto;">
+                <option selected>Most Relevant</option>
+                <option value="1">Newest First</option>
+                <option value="2">Most Played</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Music List Section -->
+<div class="container mt-4 music-list-container">
+    {% if songs %}
+        {% for song in songs %}
+        <div class="music-track-item">
+            <div class="track-info">
+                <div class="play-btn-wrapper">
+                    <button class="btn-play-pause" data-song-id="{{ song.id }}" data-audio-url="{{ song.audio_file.url }}">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+                <div class="track-details">
+                    <h5 class="track-title">{{ song.title }}</h5>
+                    <p class="track-artist">{{ song.artist }}</p>
+                </div>
+            </div>
+            <div class="track-meta">
+                <span class="track-duration">3:45</span> <!-- NOTE: Aapne duration field remove kar diya tha, isliye static rakha hai -->
+                <a href="{{ song.audio_file.url }}" class="btn btn-sm btn-outline-light ms-3" download>
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="text-center mt-5">
+            <i class="fas fa-music fa-3x text-muted mb-3"></i>
+            <h4>No songs found.</h4>
+            <p class="text-muted">Be the first one to upload a track!</p>
+            {% if user.is_authenticated %}
+                <a href="{% url 'music:upload_song' %}" class="btn btn-primary">Upload Song</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/music_list.js' %}"></script>
+{% endblock %}

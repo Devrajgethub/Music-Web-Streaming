@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ song.title }} - MusicStream{% endblock %}
+
+{% block content %}
+<!-- song_detail.html mein ye form ho sakta hai -->
+<form action="{% url 'music:increment_play_count' song.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Play Song</button>
+</form>
+<div class="row">
+    <div class="col-md-4">
+        {% if song.cover_image %}
+        <img src="{{ song.cover_image.url }}" class="img-fluid rounded" alt="{{ song.title }}">
+        {% else %}
+        <div class="bg-secondary rounded d-flex align-items-center justify-content-center" style="height: 300px;">
+            <i class="fas fa-music fa-5x text-white"></i>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+        <h1>{{ song.title }}</h1>
+        <p class="lead">by {{ song.artist }}</p>
+        
+        <table class="table table-striped">
+            <tr>
+                <th>Album:</th>
+                <td>{{ song.album|default:"N/A" }}</td>
+            </tr>
+            <tr>
+                <th>Genre:</th>
+                <td>{{ song.genre|default:"N/A" }}</td>
+            </tr>
+            <tr>
+                <th>Duration:</th>
+                <td>{{ song.duration|default:"N/A" }}</td>
+            </tr>
+            <tr>
+                <th>Uploaded by:</th>
+                <td>{{ song.uploaded_by.username }}</td>
+            </tr>
+            <tr>
+                <th>Upload Date:</th>
+                <td>{{ song.upload_date|date:"F d, Y" }}</td>
+            </tr>
+            <tr>
+                <th>Play Count:</th>
+                <td>{{ song.play_count }}</td>
+            </tr>
+        </table>
+        
+        <div class="mt-4">
+            <button class="btn btn-success btn-lg play-btn" data-song-id="{{ song.id }}" data-audio-url="{{ song.audio_file.url }}">
+                <i class="fas fa-play"></i> Play Song
+            </button>
+            <a href="{{ song.audio_file.url }}" download="{{ song.title }}.mp3" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-download"></i> Download
+            </a>
+            {% if song.uploaded_by == user %}
+            <a href="{% url 'music:delete_song' song.id %}" class="btn btn-outline-danger btn-lg">
+                <i class="fas fa-trash"></i> Delete
+            </a>
+
+
+<a href="{% url 'music:play_song' song.id %}">Play Song</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

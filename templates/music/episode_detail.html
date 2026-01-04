@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ episode.title }} - MusicStream{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>{{ episode.title }}</h1>
+        <p class="lead">From {{ episode.podcast.title }}</p>
+        <p>{{ episode.description }}</p>
+        <p><small class="text-muted">Published on {{ episode.published_date|date:"F d, Y" }}</small></p>
+        
+        <div class="mt-4">
+            <button class="btn btn-success btn-lg btn-play-pause" data-song-id="{{ episode.id }}" data-media-type="podcast">
+                <i class="fas fa-play"></i> Play Episode
+            </button>
+            <a href="{{ episode.audio_file.url }}" download="{{ episode.title }}.mp3" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-download"></i> Download
+            </a>
+            {% if user.is_authenticated and episode.podcast.host == user %}
+            <a href="{% url 'music:delete_episode' episode.id %}" class="btn btn-outline-danger btn-lg">
+                <i class="fas fa-trash"></i> Delete
+            </a>
+            {% endif %}
+            <a href="{% url 'music:podcast_detail' episode.podcast.id %}" class="btn btn-outline-secondary btn-lg">
+                <i class="fas fa-arrow-left"></i> Back to Podcast
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/music_list.js' %}"></script>
+{% endblock %}

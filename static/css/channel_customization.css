@@ -1,0 +1,204 @@
+/* Channel Customization Page Styles */
+.channel-customization-page {
+    background-color: #f9f9f9;
+}
+
+.channel-customization-page .content-wrapper {
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Banner Preview */
+.channel-banner-preview {
+    position: relative;
+}
+
+.banner-placeholder {
+    position: relative;
+    height: 220px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.banner-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-default {
+    width: 100%;
+    height: 100%;
+    background-color: #f1f1f1;
+}
+
+.banner-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+}
+
+.profile-pic-preview {
+    width: 80px;
+    height: 80px;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #ddd;
+}
+
+.profile-pic-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Upload Areas */
+.upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.upload-area.dragover {
+    border-color: #1db954;
+    background-color: rgba(29, 185, 84, 0.05);
+}
+
+.upload-placeholder {
+    cursor: pointer;
+}
+
+/* Profile Picture Upload */
+.profile-pic-upload {
+    position: relative;
+}
+
+.profile-pic-display {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.profile-pic-placeholder {
+    width: 80px;
+    height: 80px;
+    background-color: #ddd;
+}
+
+/* Music Genre Badge */
+.genre-badge {
+    background-color: #1db954;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Channel Preview */
+.channel-preview {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.preview-banner {
+    height: 120px;
+    background-color: #f1f1f1;
+}
+
+.preview-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-banner-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #f1f1f1;
+}
+
+.preview-profile-pic {
+    width: 40px;
+    height: 40px;
+}
+
+.preview-profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-profile-pic-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #ddd;
+    font-size: 0.8rem;
+}
+
+/* Music Player Customization */
+.player-theme-preview {
+    width: 100%;
+    height: 80px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.player-theme-preview.dark {
+    background-color: #121212;
+    color: white;
+}
+
+.player-theme-preview.light {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.player-theme-preview.colorful {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+    color: white;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.player-controls i {
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .banner-placeholder {
+        height: 150px;
+    }
+    
+    .profile-pic-preview {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .preview-banner {
+        height: 80px;
+    }
+    
+    .preview-profile-pic {
+        width: 30px;
+        height: 30px;
+    }
+}

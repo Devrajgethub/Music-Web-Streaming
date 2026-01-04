@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ song.title }} - MusicStream{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        {% if song.cover_image %}
+        <img src="{{ song.cover_image.url }}" class="img-fluid rounded" alt="{{ song.title }}">
+        {% else %}
+        <div class="bg-secondary rounded d-flex align-items-center justify-content-center" style="height: 300px;">
+            <i class="fas fa-music fa-3x text-white"></i>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+        <h1>{{ song.title }}</h1>
+        <p class="lead">by {{ song.artist }}</p>
+        
+        <table class="table table-striped">
+            <tr>
+                <th>Album:</th>
+                <td>{{ song.album|default:"N/A" }}</td>
+            </tr>
+            <tr>
+                <th>Genre:</th>
+                <td>{{ song.genre|default:"N/A" }}</td>
+            </tr>
+            <tr>
+                <th>Uploaded by:</th>
+                <td>
+                    <a href="{% url 'users:user_profile' song.uploaded_by.username %}" class="text-decoration-none">
+                        <img src="{{ song.uploaded_by.profile.profile_image.url }}" alt="{{ song.uploaded_by.username }}" class="rounded-circle me-2" width="30" height="30">
+                        {{ song.uploaded_by.username }}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Upload Date:</th>
+                <td>{{ song.upload_date|date:"F d, Y" }}</td>
+            </tr>
+            <tr>
+                <th>Play Count:</th>
+                <td>{{ song.play_count }}</td>
+            </tr>
+        </table>
+        
+        <div class="mt-4">
+            <button class="btn btn-success btn-lg btn-play-pause" data-song-id="{{ song.id }}">
+                <i class="fas fa-play"></i> Play Song
+            </button>
+            <a href="{{ song.audio_file.url }}" download="{{ song.title }}.mp3" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-download"></i> Download
+            </a>
+            {% if song.uploaded_by == user %}
+            <a href="{% url 'music:delete_song' song.id %}" class="btn btn-outline-danger btn-lg">
+                <i class="fas fa-trash"></i> Delete
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Follow Button -->
+{% if user.is_authenticated and song.uploaded_by != user %}
+<div class="mt-3">
+    <button class="btn follow-btn {% if is_following %}btn-primary{% else %}btn-outline-primary{% endif %}" 
+            data-username="{{ song.uploaded_by.username }}">
+        {% if is_following %}
+        <i class="fas fa-user-check"></i> Following
+        {% else %}
+        <i class="fas fa-user-plus"></i> Follow
+        {% endif %}
+    </button>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/music_list.js' %}"></script>
+{% endblock %}

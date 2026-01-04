@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>My Songs</h1>
+  <div class="song-list">
+    {# Yeh loop aapke already existing code mein hai #}
+    {% for song in songs %}
+      <div class="song-item">
+        <h3>{{ song.title }}</h3>
+        <p>Artist: {{ song.artist }}</p>
+        
+        <!-- YEH PLAY BUTTON HAI, ISSE ADD KAREIN -->
+        <button class="btn-play-pause" data-song-id="{{ song.id }}">
+            <i class="fas fa-play"></i> Play
+        </button>
+
+      </div>
+    {% empty %}
+      <p>No songs available.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/music_list.js' %}"></script>
+{% endblock %}

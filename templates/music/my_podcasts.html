@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Podcasts - MusicStream{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>My Podcasts</h1>
+                <a href="{% url 'music:upload_podcast' %}" class="btn btn-primary">
+                    <i class="fas fa-upload"></i> Upload New Podcast
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        {% if podcasts %}
+            {% for podcast in podcasts %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card song-card h-100">
+                    {% if podcast.cover_image %}
+                    <img src="{{ podcast.cover_image.url }}" class="card-img-top" alt="{{ podcast.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <i class="fas fa-podcast fa-3x text-white"></i>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ podcast.title }}</h5>
+                        <p class="card-text">
+                            {{ podcast.description|truncatewords:15 }}<br>
+                            <span class="badge bg-secondary">{{ podcast.episodes.count }} Episodes</span>
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'music:podcast_detail' podcast.id %}" class="btn btn-outline-primary">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                            <a href="{% url 'music:upload_episode' podcast.id %}" class="btn btn-outline-success">
+                                <i class="fas fa-plus"></i> Add Episode
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small>Created on {{ podcast.created_at|date:"M d, Y" }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> You haven't created any podcasts yet.
+                    <a href="{% url 'music:upload_podcast' %}" class="btn btn-primary btn-sm ms-2">Create Your First Podcast</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

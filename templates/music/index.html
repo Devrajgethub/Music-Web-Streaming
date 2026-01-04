@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}MusicStream - Home{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center text-white py-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Welcome to MusicStream</h1>
+        <p class="lead mb-4">Your professional music streaming platform with millions of songs and podcasts.</p>
+        
+        {% if not user.is_authenticated %}
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg">Login</a>
+            <a href="{% url 'users:register' %}" class="btn btn-success btn-lg">Sign Up for Free</a>
+        </div>
+        {% else %}
+        <p class="lead">Welcome back, {{ user.username }}! Start exploring your favorite music.</p>
+        <a href="{% url 'music:discover' %}" class="btn btn-success btn-lg">Discover Music</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-dark text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-music fa-3x mb-3 text-success"></i>
+                    <h5 class="card-title">Millions of Songs</h5>
+                    <p class="card-text">Stream from a vast library of songs across all genres.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-dark text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-podcast fa-3x mb-3 text-info"></i>
+                    <h5 class="card-title">Popular Podcasts</h5>
+                    <p class="card-text">Tune in to your favorite podcasts and discover new ones.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-dark text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-users fa-3x mb-3 text-warning"></i>
+                    <h5 class="card-title">Share with Friends</h5>
+                    <p class="card-text">Create and share playlists with your friends and family.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Playlists Section -->
+<div class="container my-5">
+    <h2 class="text-white mb-4">Featured Playlists</h2>
+    <div class="row">
+        <!-- Example Playlist Cards -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card bg-dark text-white">
+                <img src="https://picsum.photos/seed/playlist1/300/300.jpg" class="card-img-top" alt="Playlist">
+                <div class="card-body">
+                    <h6 class="card-title">Chill Vibes</h6>
+                    <p class="card-text small text-secondary">Relax and unwind with these smooth tracks.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card bg-dark text-white">
+                <img src="https://picsum.photos/seed/playlist2/300/300.jpg" class="card-img-top" alt="Playlist">
+                <div class="card-body">
+                    <h6 class="card-title">Workout Energy</h6>
+                    <p class="card-text small text-secondary">High-energy beats to power your workout.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card bg-dark text-white">
+                <img src="https://picsum.photos/seed/playlist3/300/300.jpg" class="card-img-top" alt="Playlist">
+                <div class="card-body">
+                    <h6 class="card-title">Focus Flow</h6>
+                    <p class="card-text small text-secondary">Instrumental music to help you concentrate.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card bg-dark text-white">
+                <img src="https://picsum.photos/seed/playlist4/300/300.jpg" class="card-img-top" alt="Playlist">
+                <div class="card-body">
+                    <h6 class="card-title">Party Hits</h6>
+                    <p class="card-text small text-secondary">The hottest tracks to get the party started.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

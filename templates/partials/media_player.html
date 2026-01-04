@@ -1,0 +1,116 @@
+<!-- Professional Media Player - Spotify Style -->
+<div class="media-player-footer hidden" id="media-player-footer">
+    <div class="media-player-container">
+        <div class="media-player-layout">
+            <!-- Media Info Section -->
+            <div class="media-info">
+                <img id="media-cover" src="/static/images/default-album-art.jpg" alt="Media Cover" class="media-cover">
+                <div class="media-details">
+                    <div id="media-title" class="media-title">No media playing</div>
+                    <div id="media-artist" class="media-artist">Select a song or podcast</div>
+                </div>
+            </div>
+            
+            <!-- Media Progress Section -->
+            <div class="media-progress-section">
+                <div class="media-progress-bar" id="media-progress-bar">
+                    <div id="media-progress" class="media-progress" style="width: 0%"></div>
+                </div>
+                <div class="media-time">
+                    <span id="media-current-time">0:00</span>
+                    <span id="media-duration">0:00</span>
+                </div>
+            </div>
+            
+            <!-- Media Controls Section -->
+            <div class="media-controls-section">
+                <div class="media-controls">
+                    <button id="media-shuffle-btn" class="media-control-btn" title="Shuffle">
+                        <i class="fas fa-random"></i>
+                    </button>
+                    
+                    <button id="media-prev-btn" class="media-control-btn" title="Previous">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    
+                    <button id="media-rewind-btn" class="media-control-btn" title="Rewind">
+                        <i class="fas fa-backward"></i>
+                    </button>
+                    
+                    <button id="media-play-btn" class="media-control-btn media-play-btn" title="Play">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    
+                    <button id="media-pause-btn" class="media-control-btn media-pause-btn" title="Pause" style="display: none;">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    
+                    <button id="media-forward-btn" class="media-control-btn" title="Forward">
+                        <i class="fas fa-forward"></i>
+                    </button>
+                    
+                    <button id="media-next-btn" class="media-control-btn" title="Next">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    
+                    <button id="media-repeat-btn" class="media-control-btn" title="Repeat">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+                
+                <div class="media-extras">
+                    <div class="media-volume-control">
+                        <button id="media-mute-btn" class="media-control-btn" title="Mute">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <div class="media-volume-slider" id="media-volume-slider">
+                            <div class="media-volume-level" id="media-volume-level" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-speed-controls">
+                        <button class="media-speed-btn" data-speed="0.5">0.5x</button>
+                        <button class="media-speed-btn" data-speed="0.75">0.75x</button>
+                        <button class="media-speed-btn active" data-speed="1.0">1x</button>
+                        <button class="media-speed-btn" data-speed="1.25">1.25x</button>
+                        <button class="media-speed-btn" data-speed="1.5">1.5x</button>
+                        <button class="media-speed-btn" data-speed="2.0">2x</button>
+                    </div>
+                    
+                    <div class="media-other-controls">
+                        <button id="media-queue-btn" class="media-control-btn" title="Queue">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        
+                        <button id="media-device-btn" class="media-control-btn" title="Devices">
+                            <i class="fas fa-desktop"></i>
+                        </button>
+                        
+                        <button id="media-fullscreen-btn" class="media-control-btn" title="Fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Queue Panel -->
+    <div class="media-queue-panel" id="media-queue-panel">
+        <div class="media-queue-header">
+            <h3 class="media-queue-title">Queue</h3>
+            <button id="media-queue-close" class="media-queue-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="media-queue-list" id="media-queue-list">
+            <!-- Queue items will be dynamically added here -->
+        </div>
+    </div>
+    
+    <!-- Visualizer Canvas -->
+    <canvas id="visualizer-canvas" style="display: none; width: 100%; height: 60px;"></canvas>
+</div>
+
+<!-- Progress Tooltip -->
+<div id="progress-tooltip" class="progress-tooltip" style="display: none;"></div>

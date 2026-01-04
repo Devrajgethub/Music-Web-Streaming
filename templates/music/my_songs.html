@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Songs - MusicStream{% endblock %}
+
+{% block content %}
+<div class="my-songs-container">
+    <div class="my-songs-header">
+        <h1 class="my-songs-title">My Songs</h1>
+        <a href="{% url 'music:upload_song' %}" class="btn btn-primary">
+            <i class="fas fa-upload"></i> Upload New Song
+        </a>
+    </div>
+    
+    <div class="my-songs-grid">
+        {% if songs %}
+            {% for song in songs %}
+            <div class="my-song-card">
+                {% if song.cover_image %}
+                <img src="{{ song.cover_image.url }}" alt="{{ song.title }}">
+                {% else %}
+                <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 180px;">
+                    <i class="fas fa-music fa-3x text-white"></i>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ song.title }}</h5>
+                    <p class="card-text">
+                        <i class="fas fa-user"></i> {{ song.artist }}<br>
+                        {% if song.album %}<i class="fas fa-compact-disc"></i> {{ song.album }}<br>{% endif %}
+                        {% if song.genre %}<i class="fas fa-tag"></i> {{ song.genre }}<br>{% endif %}
+                        <i class="fas fa-play"></i> {{ song.play_count }} plays
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'music:song_detail' song.id %}" class="btn btn-outline-primary">
+                            <i class="fas fa-info-circle"></i> Details
+                        </a>
+                        <a href="{% url 'music:delete_song' song.id %}" class="btn btn-outline-danger">
+                            <i class="fas fa-trash"></i> Delete
+                        </a>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <small>Uploaded on {{ song.upload_date|date:"M d, Y" }}</small>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert">
+                    <i class="fas fa-info-circle"></i> You haven't uploaded any songs yet.
+                    <a href="{% url 'music:upload_song' %}" class="btn btn-primary btn-sm ms-2">Upload Your First Song</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
